@@ -51,7 +51,6 @@ void Plot::Divide(int columns, int rows) {
 		sprintf(buff, "Title_%d", i);
 		titles[i] = buff;
 	}
-	fprintf(gnuplotpipe, "set multiplot layout %d, %d\n", dims[0], dims[1]);
 };
 
 void Plot::Cd(int cell) {
