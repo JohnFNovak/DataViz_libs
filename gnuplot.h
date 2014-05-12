@@ -20,6 +20,7 @@ Gnuplot::Gnuplot() {
 	// with -persist option you will see the windows as your program ends
 	gnuplotpipe=popen("gnuplot -persist","w");
 	if (!gnuplotpipe) { cerr<< ("Gnuplot not found !"); }
+	fprintf(gnuplotpipe,"set term x11 noraise\n");
 }
 
 Gnuplot::~Gnuplot() {
