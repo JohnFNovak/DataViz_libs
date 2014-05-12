@@ -26,18 +26,12 @@ class spectra {
     public:
         spectra(double, double, int);  // takes: lower, upper, number of bins
         spectra(double, double, int, double, double, int);
-        void addEntry(float);  // takes: entry value
-        void addEntry(int);
-        void addEntry(double);
-        void addEntry(float, float);
-        void addEntry(int, int);
-        void addEntry(double, double);
-        void addEntry(float, int);
-        void addEntry(float, double);
-        void addEntry(int, float);
-        void addEntry(double, float);
-        void addEntry(double, int);
-        void addEntry(int, double);
+        template<class TYPE>
+        void addEntry(TYPE);  // takes: entry value
+
+        template<class TYPE_A, class TYPE_B>
+        void addEntry(TYPE_A, TYPE_B);
+
         void print(string);  // takes: output file name
         double getMean(void);
         double getXMean(int);
@@ -105,84 +99,16 @@ spectra::spectra(double l_bound1, double u_bound1, int bins1,
     count = 0;
 }
 
-void spectra::addEntry(float val) {
+template<class TYPE>
+void spectra::addEntry(TYPE val) {
     if ((val < Xub) && (val > Xlb)) {
         spectra1[int(((val-Xlb)/(Xub-Xlb))*Xbins)]++;
         count++;
     }
 }
 
-void spectra::addEntry(int val) {
-    if ((val < Xub) && (val > Xlb)) {
-        spectra1[int(((val-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(double val) {
-    if ((val < Xub) && (val > Xlb)) {
-        spectra1[int(((val-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(float Xval, float Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(int Xval, int Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(double Xval, double Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(float Xval, int Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(float Xval, double Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(double Xval, float Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(int Xval, float Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(double Xval, int Yval) {
-    if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
-        spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
-        count++;
-    }
-}
-
-void spectra::addEntry(int Xval, double Yval) {
+template<class TYPE_A, class TYPE_B>
+void spectra::addEntry(TYPE_A Xval, TYPE_B Yval) {
     if ((Xval < Xub) && (Xval > Xlb) && (Yval < Yub) && (Yval > Ylb)) {
         spectra2[int(((Yval-Ylb)/(Yub-Ylb))*Ybins)][int(((Xval-Xlb)/(Xub-Xlb))*Xbins)]++;
         count++;
